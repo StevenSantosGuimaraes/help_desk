@@ -1,0 +1,73 @@
+<button id="sidebar-toggle" class="btn btn-primary btn-sm"
+    style="position: fixed; top: 20px; left: 20px; z-index: 1051;">
+    <span id="sidebar-toggle-icon">&#9776;</span>
+</button>
+
+<div id="sidebar" class="d-flex flex-column flex-shrink-0 p-3 bg-dark text-white vh-100"
+    style="width: 220px; position: fixed; left: 0; top: 0; bottom: 0; z-index: 1050; transition: left 0.3s;">
+    <a href="/" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto text-white text-decoration-none">
+        <span class="fs-4">Help Desk</span>
+    </a>
+    <hr>
+    <ul class="nav nav-pills flex-column mb-auto">
+        <li class="nav-item">
+            <a href="/" class="nav-link sidebar-link">Início</a>
+        </li>
+        <li>
+            <a href="/tickets/" class="nav-link sidebar-link">Tickets</a>
+        </li>
+        <li>
+            <a href="/kb/" class="nav-link sidebar-link">Base de Conhecimento</a>
+        </li>
+        {% if user.is_authenticated %}
+        <li>
+            <form action="{% url 'logout' %}" method="post" style="display:inline;">
+                {% csrf_token %}
+                <button type="submit" class="btn btn-link nav-link sidebar-link" style="padding:0;">Sair</button>
+            </form>
+        </li>
+        {% else %}
+        <li>
+            <a href="{% url 'login' %}" class="nav-link sidebar-link">Entrar</a>
+        </li>
+        {% endif %}
+    </ul>
+    <hr>
+    <div class="sidebar-user small mb-2">Olá, {{ user.get_full_name|default:user.username }}</div>
+    <button id="theme-toggle" class="btn btn-outline-light btn-sm mt-2" type="button">Alternar Tema</button>
+</div>
+
+<script>
+
+    document.addEventListener('DOMContentLoaded', function () {
+
+        const sidebar = document.getElementById('sidebar');
+        const themeToggle = document.getElementById('theme-toggle');
+        const body = document.body;
+
+        function setTheme(theme) {
+            if (theme === 'light') {
+                sidebar.classList.remove('bg-dark', 'text-white');
+                sidebar.classList.add('bg-light', 'text-dark');
+                body.classList.remove('bg-dark', 'text-white');
+                body.classList.add('bg-light', 'text-dark');
+            } else {
+                sidebar.classList.remove('bg-light', 'text-dark');
+                sidebar.classList.add('bg-dark', 'text-white');
+                body.classList.remove('bg-light', 'text-dark');
+                body.classList.add('bg-dark', 'text-white');
+            }
+            localStorage.setItem('theme', theme);
+        }
+
+        themeToggle.addEventListener('click', function () {
+            const current = localStorage.getItem('theme') || 'dark';
+            setTheme(current === 'dark' ? 'light' : 'dark');
+        });
+
+        const savedTheme = localStorage.getItem('theme') || 'dark';
+        setTheme(savedTheme);
+
+    });
+
+</script>

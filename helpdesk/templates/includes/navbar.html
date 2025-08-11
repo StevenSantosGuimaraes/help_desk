@@ -1,0 +1,34 @@
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+  <div class="container-fluid">
+    <a class="navbar-brand" href="/">Help Desk</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="navbar-nav ms-auto">
+        <li class="nav-item">
+          <a class="nav-link" href="/">Início</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/tickets/">Tickets</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/kb/">Base de Conhecimento</a>
+        </li>
+        {% if user.is_authenticated %}
+        <li class="nav-item d-flex align-items-center">
+          <span class="navbar-text me-2">Olá, {{ user.get_full_name|default:user.username }}</span>
+          <form action="{% url 'logout' %}" method="post" style="display:inline;">
+            {% csrf_token %}
+            <button type="submit" class="btn btn-link nav-link" style="padding:0;">Sair</button>
+          </form>
+        </li>
+        {% else %}
+        <li class="nav-item">
+          <a class="nav-link" href="/accounts/login/">Entrar</a>
+        </li>
+        {% endif %}
+      </ul>
+    </div>
+  </div>
+</nav>

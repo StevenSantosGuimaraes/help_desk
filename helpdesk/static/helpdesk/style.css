@@ -1,0 +1,24 @@
+body.sidebar-collapsed #sidebar {
+  left: -220px;
+}
+body.sidebar-collapsed #sidebar-toggle {
+  left: 20px;
+}
+#sidebar-toggle {
+  transition: left 0.3s;
+}
+.sidebar-link {
+  color: inherit !important;
+}
+.bg-light .sidebar-link {
+  color: #333 !important;
+}
+.bg-dark .sidebar-link {
+  color: #fff !important;
+}
+.sidebar-user {
+  color: #bbb;
+}
+.bg-light .sidebar-user {
+  color: #333;
+}

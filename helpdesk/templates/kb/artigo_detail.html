@@ -1,0 +1,11 @@
+{% extends "base.html" %}
+{% block title %}{{ artigo.titulo }}{% endblock %}
+{% block content %}
+<h1>{{ artigo.titulo }}</h1>
+<p><strong>Categoria:</strong> {{ artigo.categoria }}</p>
+<p><strong>Conteúdo:</strong></p>
+<div>{{ artigo.conteudo|linebreaks }}</div>
+<p><strong>Criado por:</strong> {{ artigo.criado_por }}</p>
+<p><strong>Criado em:</strong> {{ artigo.criado_em }}</p>
+<p><strong>Atualizado em:</strong> {{ artigo.atualizado_em }}</p>
+{% endblock %}

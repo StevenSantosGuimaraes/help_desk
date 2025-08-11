@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+{% block title %}Base de Conhecimento{% endblock %}
+{% block content %}
+<h1>Base de Conhecimento</h1>
+<ul class="list-group">
+    {% for artigo in artigos %}
+    <li class="list-group-item">
+        <a href="/kb/{{ artigo.id }}/">{{ artigo.titulo }}</a> - {{ artigo.categoria }}
+    </li>
+    {% empty %}
+    <li class="list-group-item">Nenhum artigo encontrado.</li>
+    {% endfor %}
+</ul>
+{% endblock %}
